@@ -48,8 +48,8 @@ const Login = async (req: Request, res: Response) => {
 };
 
 const RefreshToken = async (req: Request, res: Response) => {
-  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
-  const JWT_SECRET = process.env.JWT_SECRET || "";
+  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "your_token";
+  const JWT_SECRET = process.env.JWT_SECRET || "your_token";
   const { token: refreshToken, id: userId } = req.body;
   if (!refreshToken || !userId) {
     return res.sendStatus(401);
@@ -66,7 +66,7 @@ const RefreshToken = async (req: Request, res: Response) => {
       const accessToken = jwt.sign(
         { id: userId, username: decoded.username },
         JWT_SECRET,
-        { expiresIn: "3600s" }
+        { expiresIn: "36h" }
       );
       return res.status(201).json({ token: accessToken });
     });

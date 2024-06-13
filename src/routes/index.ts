@@ -6,9 +6,12 @@ import messageRoute from "./messageRoute";
 
 const router = Router();
 const routes = (app: express.Application) => {
-  router.use("/auth", authRoute);
-  router.use("/user", userRoute);
-  router.use("/message", messageRoute);
+    router.use("/auth", authRoute);
+    console.log("Auth routes added");
+    router.use("/user", userRoute);
+    console.log("User routes added");
+    router.use("/message", messageRoute);
+    console.log("Message routes added");
 
   return app.use("/api", router);
 };

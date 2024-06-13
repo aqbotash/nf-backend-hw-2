@@ -3,19 +3,27 @@ import MessageModel from "./models/MessageModel";
 import User from "../auth/models/User";
 
 class MessageController {
-  async list(req: Request, res: Response) {
-    const { senderID, receiverID } = req.body;
-    try {
-      const listMessage = await MessageModel.find({
-        $or: [{ senderID }, { receiverID }],
-      })
-        .populate("senderID")
-        .populate("receiverID");
-      res.status(200).json(listMessage);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  }
+    async list(req: Request, res: Response) {
+        const { senderID, receiverID } = req.body;
+        console.log("Received list request with body:", req.body); // Log request body
+    
+        try {
+          const listMessage = await MessageModel.find({
+            $or: [{ senderID }, { receiverID }],
+          })
+            .populate("senderID")
+            .populate("receiverID");
+    
+          console.log("List Message Response:", listMessage); // Log response data
+          if (listMessage.length === 0) {
+            return res.status(200).json({ message: "No messages found" });
+          }
+          res.status(200).json(listMessage);
+        } catch (error) {
+          console.error("Error fetching list message:", error); // Log error
+          res.status(400).json({ error: "Error fetching messages" });
+        }
+      }
   async create(data: any, io: any, socket: any, listSocketID: any) {
     const { senderID, receiverID, message } = data;
     const newMessage = new MessageModel({ senderID, receiverID, message });

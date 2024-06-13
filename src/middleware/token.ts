@@ -15,7 +15,7 @@ const createToken = (user: any) => {
 };
 
 const refreshToken = (data: any, token: string) => {
-  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "";
+  const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || "your_secret";
   let payload = { username: data.username };
   try {
     token = jwt.sign(payload, REFRESH_TOKEN_SECRET);

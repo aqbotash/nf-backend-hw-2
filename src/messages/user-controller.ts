@@ -7,6 +7,7 @@ class userController {
       const userList = await User.find();
       res.status(200).json(userList);
     } catch (error) {
+        console.log("here");
       res.status(400).json(error);
     }
   }
