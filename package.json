@@ -8,12 +8,14 @@
     "test:e2e": "jest --testPathPattern=src/e2e",
     "build": "tsc --build",
     "start": "node ./dist/index.js",
-    "start:dev": "nodemon ./src/index.ts"
+    "start:dev": "nodemon ./src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

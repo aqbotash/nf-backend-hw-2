@@ -21,7 +21,6 @@ class AuthService {
       username,
       password: hashedPassword,
     });
-
     await newUser.save();
     return newUser;
   }
